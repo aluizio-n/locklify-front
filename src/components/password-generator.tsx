@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { Refresh } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import { useState, useEffect } from "react";
 import { PasswordStrength } from "./password-strength";
 
@@ -50,7 +50,7 @@ export function PasswordGenerator({
             onClick={generatePassword}
             className="h-8 w-8"
           >
-            <Refresh className="h-4 w-4" />
+            <RefreshCw className="h-4 w-4" />
             <span className="sr-only">Gerar nova senha</span>
           </Button>
         </div>
