@@ -1,6 +1,6 @@
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Shield } from "lucide-react";
@@ -20,24 +20,24 @@ export const LandingHeader = () => {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()} onClick={() => navigate("/")}>
+                <Link to="/" className={navigationMenuTriggerStyle()}>
                   Início
-                </NavigationMenuLink>
+                </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#features">
+                <a href="#features" className={navigationMenuTriggerStyle()}>
                   Recursos
-                </NavigationMenuLink>
+                </a>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#pricing">
+                <a href="#pricing" className={navigationMenuTriggerStyle()}>
                   Preços
-                </NavigationMenuLink>
+                </a>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#faq">
+                <a href="#faq" className={navigationMenuTriggerStyle()}>
                   FAQ
-                </NavigationMenuLink>
+                </a>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>

@@ -1,4 +1,5 @@
 
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -41,5 +42,9 @@ const rootElement = document.getElementById("root");
 if (rootElement && !rootElement.hasAttribute('data-react-root')) {
   const root = createRoot(rootElement);
   rootElement.setAttribute('data-react-root', 'true');
-  root.render(<App />);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 }
