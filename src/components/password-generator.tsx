@@ -7,11 +7,11 @@ import { useState, useEffect } from "react";
 import { PasswordStrength } from "./password-strength";
 
 interface PasswordGeneratorProps {
-  onPasswordGenerated: (password: string) => void;
+  onGeneratePassword: (password: string) => void;
 }
 
 export function PasswordGenerator({
-  onPasswordGenerated,
+  onGeneratePassword,
 }: PasswordGeneratorProps) {
   const [length, setLength] = useState<number>(16);
   const [useUppercase, setUseUppercase] = useState<boolean>(true);
@@ -32,7 +32,7 @@ export function PasswordGenerator({
     }
 
     setGeneratedPassword(password);
-    onPasswordGenerated(password);
+    onGeneratePassword(password);
   };
 
   useEffect(() => {

@@ -9,8 +9,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
-import PasswordGenerator from "@/components/password-generator";
-import PasswordStrength from "@/components/password-strength";
+import { PasswordGenerator } from "@/components/password-generator";
+import { PasswordStrength } from "@/components/password-strength";
 
 export default function AddPassword() {
   const navigate = useNavigate();
