@@ -25,6 +25,7 @@ import {
 import { ThemeToggle } from "@/components/theme-toggle";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
+import SEO from "@/components/seo";
 
 const checkoutSchema = z.object({
   cardNumber: z.string()
@@ -160,244 +161,254 @@ const Checkout = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate("/")}
-            className="flex items-center gap-1"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Voltar
-          </Button>
-          <ThemeToggle />
-        </div>
-      </header>
+    <>
+      <SEO 
+        title={`Checkout - ${planName} | Locklify`}
+        description={`Complete sua compra do ${planName} do Locklify por R$ ${price},00 e proteja suas senhas com segurança.`}
+        path="/checkout"
+      />
       
-      <div className="flex-1">
-        <div className="container max-w-6xl px-4 md:px-6 py-6">
-          <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="md:col-span-2">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl">Informações de Pagamento</CardTitle>
-                  <CardDescription>
-                    Preencha os dados do seu cartão para finalizar a assinatura
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <h3 className="text-lg font-medium">Detalhes do Cartão</h3>
-                          <div className="flex items-center gap-2">
-                            <Lock className="h-4 w-4 text-muted-foreground" />
-                            <span className="text-sm text-muted-foreground">Pagamento seguro</span>
-                          </div>
-                        </div>
-                        
-                        <FormField
-                          control={form.control}
-                          name="cardNumber"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Número do Cartão</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="1234 5678 9012 3456"
-                                  {...field}
-                                  onChange={handleCardNumberInput}
-                                  maxLength={19}
-                                  disabled={isProcessing}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name="cardName"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Nome no Cartão</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Nome como aparece no cartão"
-                                  {...field}
-                                  disabled={isProcessing}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <div className="grid grid-cols-2 gap-4">
-                          <FormField
-                            control={form.control}
-                            name="expiryDate"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Validade</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    placeholder="MM/YY"
-                                    {...field}
-                                    onChange={handleExpiryDateInput}
-                                    maxLength={5}
-                                    disabled={isProcessing}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          <FormField
-                            control={form.control}
-                            name="cvv"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>CVV</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    placeholder="123"
-                                    {...field}
-                                    maxLength={3}
-                                    disabled={isProcessing}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-                      </div>
-
-                      <Separator />
-
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-medium">Endereço de Cobrança</h3>
-                        
-                        <FormField
-                          control={form.control}
-                          name="address"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Endereço</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Rua, número, complemento"
-                                  {...field}
-                                  disabled={isProcessing}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <div className="grid grid-cols-2 gap-4">
-                          <FormField
-                            control={form.control}
-                            name="city"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Cidade</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    placeholder="Sua cidade"
-                                    {...field}
-                                    disabled={isProcessing}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          <FormField
-                            control={form.control}
-                            name="postalCode"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>CEP</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    placeholder="00000-000"
-                                    {...field}
-                                    disabled={isProcessing}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-                      </div>
-
-                      <Button
-                        type="submit"
-                        className="w-full bg-slate-800 hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600"
-                        disabled={isProcessing}
-                      >
-                        <CreditCard className="mr-2 h-4 w-4" />
-                        {isProcessing ? "Processando..." : "Finalizar Pagamento"}
-                      </Button>
-                    </form>
-                  </Form>
-                </CardContent>
-              </Card>
+      <div className="min-h-screen bg-background">
+        <div className="flex flex-col min-h-screen">
+          <header className="border-b">
+            <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate("/")}
+                className="flex items-center gap-1"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Voltar
+              </Button>
+              <ThemeToggle />
             </div>
-            
-            <div className="space-y-4 md:mt-9">
+          </header>
+          
+          <div className="flex-1">
+            <div className="container max-w-6xl px-4 md:px-6 py-6">
+              <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
               
-              <PlanDetails 
-                name={planName} 
-                price={`R$ ${price},00`} 
-                features={selectedPlanFeatures} 
-              />
-              
-              <div className="border rounded-lg p-4">
-                <div className="flex justify-between mb-2">
-                  <span>Subtotal</span>
-                  <span>R$ {price},00</span>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="md:col-span-2">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Informações de Pagamento</CardTitle>
+                      <CardDescription>
+                        Preencha os dados do seu cartão para finalizar a assinatura
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                          <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                              <h3 className="text-lg font-medium">Detalhes do Cartão</h3>
+                              <div className="flex items-center gap-2">
+                                <Lock className="h-4 w-4 text-muted-foreground" />
+                                <span className="text-sm text-muted-foreground">Pagamento seguro</span>
+                              </div>
+                            </div>
+                            
+                            <FormField
+                              control={form.control}
+                              name="cardNumber"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Número do Cartão</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="1234 5678 9012 3456"
+                                      {...field}
+                                      onChange={handleCardNumberInput}
+                                      maxLength={19}
+                                      disabled={isProcessing}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <FormField
+                              control={form.control}
+                              name="cardName"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Nome no Cartão</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="Nome como aparece no cartão"
+                                      {...field}
+                                      disabled={isProcessing}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <div className="grid grid-cols-2 gap-4">
+                              <FormField
+                                control={form.control}
+                                name="expiryDate"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Validade</FormLabel>
+                                    <FormControl>
+                                      <Input
+                                        placeholder="MM/YY"
+                                        {...field}
+                                        onChange={handleExpiryDateInput}
+                                        maxLength={5}
+                                        disabled={isProcessing}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+
+                              <FormField
+                                control={form.control}
+                                name="cvv"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>CVV</FormLabel>
+                                    <FormControl>
+                                      <Input
+                                        placeholder="123"
+                                        {...field}
+                                        maxLength={3}
+                                        disabled={isProcessing}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+                            </div>
+                          </div>
+
+                          <Separator />
+
+                          <div className="space-y-4">
+                            <h3 className="text-lg font-medium">Endereço de Cobrança</h3>
+                            
+                            <FormField
+                              control={form.control}
+                              name="address"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Endereço</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="Rua, número, complemento"
+                                      {...field}
+                                      disabled={isProcessing}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <div className="grid grid-cols-2 gap-4">
+                              <FormField
+                                control={form.control}
+                                name="city"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Cidade</FormLabel>
+                                    <FormControl>
+                                      <Input
+                                        placeholder="Sua cidade"
+                                        {...field}
+                                        disabled={isProcessing}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+
+                              <FormField
+                                control={form.control}
+                                name="postalCode"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>CEP</FormLabel>
+                                    <FormControl>
+                                      <Input
+                                        placeholder="00000-000"
+                                        {...field}
+                                        disabled={isProcessing}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+                            </div>
+                          </div>
+
+                          <Button
+                            type="submit"
+                            className="w-full bg-slate-800 hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600"
+                            disabled={isProcessing}
+                          >
+                            <CreditCard className="mr-2 h-4 w-4" />
+                            {isProcessing ? "Processando..." : "Finalizar Pagamento"}
+                          </Button>
+                        </form>
+                      </Form>
+                    </CardContent>
+                  </Card>
                 </div>
-                <div className="flex justify-between mb-2">
-                  <span>Impostos</span>
-                  <span>R$ 0,00</span>
+                
+                <div className="space-y-4 md:mt-9">
+                  
+                  <PlanDetails 
+                    name={planName} 
+                    price={`R$ ${price},00`} 
+                    features={selectedPlanFeatures} 
+                  />
+                  
+                  <div className="border rounded-lg p-4">
+                    <div className="flex justify-between mb-2">
+                      <span>Subtotal</span>
+                      <span>R$ {price},00</span>
+                    </div>
+                    <div className="flex justify-between mb-2">
+                      <span>Impostos</span>
+                      <span>R$ 0,00</span>
+                    </div>
+                    <Separator className="my-3" />
+                    <div className="flex justify-between font-bold">
+                      <span>Total</span>
+                      <span>R$ {price},00</span>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 text-sm text-muted-foreground">
+                    <p>Ao finalizar o pagamento, você concorda com nossos Termos de Serviço e Política de Privacidade.</p>
+                  </div>
                 </div>
-                <Separator className="my-3" />
-                <div className="flex justify-between font-bold">
-                  <span>Total</span>
-                  <span>R$ {price},00</span>
-                </div>
-              </div>
-              
-              <div className="mt-4 text-sm text-muted-foreground">
-                <p>Ao finalizar o pagamento, você concorda com nossos Termos de Serviço e Política de Privacidade.</p>
               </div>
             </div>
           </div>
+          
+          <footer className="border-t py-6">
+            <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Lock className="h-4 w-4" />
+                <span>Pagamento seguro via Stripe</span>
+              </div>
+              <p>© 2024 Locklify - Todos os direitos reservados</p>
+            </div>
+          </footer>
         </div>
       </div>
-      
-      <footer className="border-t py-6">
-        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Lock className="h-4 w-4" />
-            <span>Pagamento seguro via Stripe</span>
-          </div>
-          <p>© 2024 Locklify - Todos os direitos reservados</p>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 };
 
