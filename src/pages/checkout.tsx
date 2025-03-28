@@ -322,7 +322,7 @@ export default function Checkout() {
                 
                 <PlanDetails 
                   name="Plano Premium" 
-                  price="R$ 19,90" 
+                  price="R$ 25,00" 
                   features={[
                     "Armazenamento ilimitado de senhas",
                     "Sincronização entre dispositivos",
@@ -335,7 +335,7 @@ export default function Checkout() {
                 <div className="border rounded-lg p-4">
                   <div className="flex justify-between mb-2">
                     <span>Subtotal</span>
-                    <span>R$ 19,90</span>
+                    <span>R$ 25,00</span>
                   </div>
                   <div className="flex justify-between mb-2">
                     <span>Impostos</span>
@@ -344,7 +344,7 @@ export default function Checkout() {
                   <Separator className="my-3" />
                   <div className="flex justify-between font-bold">
                     <span>Total</span>
-                    <span>R$ 19,90</span>
+                    <span>R$ 25,00</span>
                   </div>
                 </div>
                 

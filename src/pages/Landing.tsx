@@ -158,7 +158,7 @@ const Landing = () => {
                     <div className="inline-block px-3 py-1 text-sm rounded-full bg-primary/20 text-primary">Recomendado</div>
                   </div>
                   <div className="mt-4 flex items-baseline">
-                    <span className="text-4xl font-bold">R$9,90</span>
+                    <span className="text-4xl font-bold">R$25</span>
                     <span className="ml-1 text-muted-foreground">/mês</span>
                   </div>
                 </CardHeader>
@@ -196,16 +196,16 @@ const Landing = () => {
                 </CardFooter>
               </Card>
 
-              {/* Business Plan */}
+              {/* Lifetime Plan (previously Business Plan) */}
               <Card className="flex flex-col justify-between border-2 h-full">
                 <CardHeader>
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-xl">Empresarial</CardTitle>
+                    <CardTitle className="text-xl">Vitalício</CardTitle>
                     <div className="inline-block px-3 py-1 text-sm rounded-full bg-muted">Completo</div>
                   </div>
                   <div className="mt-4 flex items-baseline">
-                    <span className="text-4xl font-bold">R$19,90</span>
-                    <span className="ml-1 text-muted-foreground">/mês</span>
+                    <span className="text-4xl font-bold">R$200</span>
+                    <span className="ml-1 text-muted-foreground">pagamento único</span>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -220,7 +220,7 @@ const Landing = () => {
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-primary mr-2" />
-                      <span>Controle de acesso por equipes</span>
+                      <span>Acesso vitalício a atualizações</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-primary mr-2" />
@@ -237,8 +237,8 @@ const Landing = () => {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full" variant="outline" onClick={() => navigate("/register")}>
-                    Fale com Vendas
+                  <Button className="w-full" variant="outline" onClick={() => navigate("/checkout")}>
+                    Comprar Agora
                   </Button>
                 </CardFooter>
               </Card>
