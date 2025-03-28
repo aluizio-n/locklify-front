@@ -16,6 +16,16 @@ export interface Account {
   updatedAt?: string;
 }
 
+// User interface
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password?: string; // Opcional pois não queremos expor a senha em todos os lugares
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 // Error handling helper
 const handleApiError = (error: unknown): string => {
   console.error('API Error:', error);
@@ -146,4 +156,175 @@ export const api = {
       throw error;
     }
   },
+
+  // Authentication endpoints
+  auth: {
+    // Login user
+    async login(email: string, password: string): Promise<{ user: User; token?: string }> {
+      try {
+        const response = await fetch(`${API_BASE_URL}/user/auth`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to authenticate');
+        }
+
+        return await response.json();
+      } catch (error) {
+        const errorMessage = handleApiError(error);
+        toast.error(`Failed to login: ${errorMessage}`);
+        throw error;
+      }
+    },
+
+    // Check if user is authenticated
+    async checkAuth(): Promise<{ authenticated: boolean; user?: User }> {
+      try {
+        const response = await fetch(`${API_BASE_URL}/user/auth/check`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          return { authenticated: false };
+        }
+
+        return await response.json();
+      } catch (error) {
+        console.error('Auth check error:', error);
+        return { authenticated: false };
+      }
+    },
+
+    // Logout user
+    async logout(): Promise<void> {
+      try {
+        const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to logout');
+        }
+      } catch (error) {
+        const errorMessage = handleApiError(error);
+        toast.error(`Failed to logout: ${errorMessage}`);
+        throw error;
+      }
+    }
+  },
+
+  // User management endpoints
+  users: {
+    // Get all users
+    async getAll(): Promise<User[]> {
+      try {
+        const response = await fetch(`${API_BASE_URL}/user/list`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to fetch users');
+        }
+
+        return await response.json();
+      } catch (error) {
+        const errorMessage = handleApiError(error);
+        toast.error(`Failed to fetch users: ${errorMessage}`);
+        throw error;
+      }
+    },
+
+    // Register a new user
+    async register(userData: { name: string; email: string; password: string }): Promise<User> {
+      try {
+        const response = await fetch(`${API_BASE_URL}/user/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to register user');
+        }
+
+        return await response.json();
+      } catch (error) {
+        const errorMessage = handleApiError(error);
+        toast.error(`Failed to register user: ${errorMessage}`);
+        throw error;
+      }
+    },
+
+    // Update user
+    async update(userId: string, userData: Partial<Omit<User, 'id' | 'createdAt' | 'updatedAt'>>): Promise<User> {
+      try {
+        const response = await fetch(`${API_BASE_URL}/user/update/${userId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to update user');
+        }
+
+        return await response.json();
+      } catch (error) {
+        const errorMessage = handleApiError(error);
+        toast.error(`Failed to update user: ${errorMessage}`);
+        throw error;
+      }
+    },
+
+    // Delete user
+    async delete(userId: string): Promise<void> {
+      try {
+        const response = await fetch(`${API_BASE_URL}/user/delete/${userId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to delete user');
+        }
+      } catch (error) {
+        const errorMessage = handleApiError(error);
+        toast.error(`Failed to delete user: ${errorMessage}`);
+        throw error;
+      }
+    }
+  }
 };
