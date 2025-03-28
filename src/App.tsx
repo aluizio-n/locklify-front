@@ -16,6 +16,7 @@ import Dashboard from "./pages/dashboard";
 import AddPassword from "./pages/add-password";
 import EditPassword from "./pages/edit-password";
 import Profile from "./pages/profile";
+import Checkout from "./pages/checkout";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
                 <Route path="/landing" element={<Landing />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/checkout" element={<Checkout />} />
                 <Route
                   path="/dashboard"
                   element={

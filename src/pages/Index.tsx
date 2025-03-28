@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Shield, Lock, Key, ExternalLink } from "lucide-react";
+import { Shield, Lock, Key, ExternalLink, CreditCard } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -47,6 +47,15 @@ const Index = () => {
           >
             <Key className="mr-2 h-5 w-5" />
             Criar conta
+          </Button>
+
+          <Button 
+            variant="secondary" 
+            className="w-full py-6 text-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600"
+            onClick={() => navigate("/checkout")}
+          >
+            <CreditCard className="mr-2 h-5 w-5" />
+            Assinar Premium
           </Button>
         </div>
         
