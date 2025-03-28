@@ -89,22 +89,22 @@ const Landing = () => {
       </section>
 
       {/* Password Security Risk Section */}
-      <section className="w-full py-12 md:py-24 bg-red-100">
+      <section className="w-full py-12 md:py-24 bg-red-700 text-white">
         <div className="container px-4 md:px-6 mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">
               O perigo de usar a mesma senha
             </h2>
-            <p className="max-w-[800px] mx-auto text-muted-foreground md:text-xl">
+            <p className="max-w-[800px] mx-auto md:text-xl">
               Quando você usa a mesma senha em vários lugares, se um site for comprometido, <span className="font-semibold">todas as suas contas estão em risco</span>.
             </p>
           </div>
           
           <div className="grid gap-8 md:grid-cols-3">
-            <Card className="bg-white">
+            <Card className="bg-red-800 text-white border-red-600">
               <CardHeader className="pb-3">
-                <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-2">
-                  <Key className="h-6 w-6 text-red-600" />
+                <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center mb-2">
+                  <Key className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle>Uma senha = Múltiplos riscos</CardTitle>
               </CardHeader>
@@ -113,10 +113,10 @@ const Landing = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-white">
+            <Card className="bg-red-800 text-white border-red-600">
               <CardHeader className="pb-3">
-                <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-2">
-                  <AlertTriangle className="h-6 w-6 text-red-600" />
+                <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center mb-2">
+                  <AlertTriangle className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle>Ataques de "credential stuffing"</CardTitle>
               </CardHeader>
@@ -125,10 +125,10 @@ const Landing = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-white">
+            <Card className="bg-red-800 text-white border-red-600">
               <CardHeader className="pb-3">
-                <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-2">
-                  <Lock className="h-6 w-6 text-red-600" />
+                <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center mb-2">
+                  <Lock className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle>Memória limitada</CardTitle>
               </CardHeader>
@@ -141,36 +141,36 @@ const Landing = () => {
           <div className="mt-12 text-center">
             <h3 className="text-2xl font-bold mb-4">Como o Locklify resolve esse problema:</h3>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-6">
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                  <Key className="h-6 w-6 text-primary" />
+              <div className="bg-red-800 p-6 rounded-lg shadow-md border border-red-600">
+                <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center mx-auto mb-4">
+                  <Key className="h-6 w-6 text-white" />
                 </div>
                 <h4 className="font-semibold mb-2">Senha única para cada site</h4>
-                <p className="text-sm text-muted-foreground">Gera automaticamente senhas fortes e diferentes para cada site que você usa.</p>
+                <p className="text-sm">Gera automaticamente senhas fortes e diferentes para cada site que você usa.</p>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                  <Lock className="h-6 w-6 text-primary" />
+              <div className="bg-red-800 p-6 rounded-lg shadow-md border border-red-600">
+                <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center mx-auto mb-4">
+                  <Lock className="h-6 w-6 text-white" />
                 </div>
                 <h4 className="font-semibold mb-2">Uma senha mestra</h4>
-                <p className="text-sm text-muted-foreground">Você só precisa lembrar de uma senha - o Locklify cuida do resto.</p>
+                <p className="text-sm">Você só precisa lembrar de uma senha - o Locklify cuida do resto.</p>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                  <Shield className="h-6 w-6 text-primary" />
+              <div className="bg-red-800 p-6 rounded-lg shadow-md border border-red-600">
+                <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center mx-auto mb-4">
+                  <Shield className="h-6 w-6 text-white" />
                 </div>
                 <h4 className="font-semibold mb-2">Criptografia avançada</h4>
-                <p className="text-sm text-muted-foreground">Suas senhas são criptografadas com os mais altos padrões de segurança.</p>
+                <p className="text-sm">Suas senhas são criptografadas com os mais altos padrões de segurança.</p>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                  <AlertTriangle className="h-6 w-6 text-primary" />
+              <div className="bg-red-800 p-6 rounded-lg shadow-md border border-red-600">
+                <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center mx-auto mb-4">
+                  <AlertTriangle className="h-6 w-6 text-white" />
                 </div>
                 <h4 className="font-semibold mb-2">Alertas de violação</h4>
-                <p className="text-sm text-muted-foreground">Receba alertas quando seus dados aparecerem em vazamentos conhecidos.</p>
+                <p className="text-sm">Receba alertas quando seus dados aparecerem em vazamentos conhecidos.</p>
               </div>
             </div>
           </div>
