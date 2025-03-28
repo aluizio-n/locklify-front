@@ -21,7 +21,7 @@ const Landing = () => {
         <div className="container px-4 md:px-6 mx-auto">
           <div className="grid gap-6 lg:grid-cols-2 items-center">
             <div className="flex flex-col justify-center space-y-4">
-              <div className="inline-block px-4 py-1.5 mb-4 text-sm font-medium border rounded-full bg-primary/10 text-primary">
+              <div className="inline-block px-4 py-1.5 mb-4 text-sm font-medium border rounded-full bg-primary text-primary-foreground">
                 Segurança de primeiro nível
               </div>
               <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
@@ -75,7 +75,7 @@ const Landing = () => {
         <div className="container px-4 md:px-6 mx-auto">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
-              <div className="inline-block px-3 py-1 text-sm rounded-full bg-primary/10 text-primary">
+              <div className="inline-block px-3 py-1 text-sm rounded-full bg-primary text-primary-foreground">
                 Como funciona
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -154,7 +154,7 @@ const Landing = () => {
                 <CardHeader>
                   <div className="flex justify-between items-center">
                     <CardTitle className="text-xl">Premium</CardTitle>
-                    <div className="inline-block px-3 py-1 text-sm rounded-full bg-primary/20 text-primary">Recomendado</div>
+                    <div className="inline-block px-3 py-1 text-sm rounded-full bg-primary text-primary-foreground">Recomendado</div>
                   </div>
                   <div className="mt-4 flex items-baseline">
                     <span className="text-4xl font-bold">R$45</span>
@@ -162,7 +162,7 @@ const Landing = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="mb-4 bg-primary/10 text-primary px-3 py-2 rounded-md text-sm">
+                  <div className="mb-4 bg-primary text-primary-foreground px-3 py-2 rounded-md text-sm">
                     Teste gratuito de 15 dias
                   </div>
                   <ul className="space-y-2 mt-4">
