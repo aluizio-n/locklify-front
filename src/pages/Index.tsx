@@ -2,14 +2,22 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Shield, Lock, Key } from "lucide-react";
+import { Shield, Lock, Key, ExternalLink } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <header className="p-4 flex justify-end">
+      <header className="p-4 flex justify-between">
+        <Button 
+          variant="link" 
+          className="flex items-center gap-1 text-primary" 
+          onClick={() => navigate("/landing")}
+        >
+          <ExternalLink className="h-4 w-4" />
+          Ver Landing Page Completa
+        </Button>
         <ThemeToggle />
       </header>
       

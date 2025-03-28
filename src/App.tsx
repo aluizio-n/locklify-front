@@ -9,6 +9,7 @@ import { AuthProvider } from "@/contexts/auth-context";
 import { PasswordsProvider } from "@/contexts/passwords-context";
 import { ProtectedRoute } from "@/components/protected-route";
 import Index from "./pages/Index";
+import Landing from "./pages/Landing";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Dashboard from "./pages/dashboard";
@@ -30,6 +31,7 @@ const App = () => (
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/landing" element={<Landing />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route
