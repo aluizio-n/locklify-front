@@ -6,6 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { PricingButton } from "@/components/pricing-button";
 import SEO from "@/components/seo";
+import LandingHeader from "@/components/landing-header";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -22,6 +23,8 @@ const Landing = () => {
         description="Gerenciador de senhas seguro que ajuda você a criar e gerenciar senhas únicas para cada serviço, evitando os riscos de usar a mesma senha em vários lugares."
         path="/"
       />
+
+      <LandingHeader />
 
       {/* Hero Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
@@ -206,7 +209,7 @@ const Landing = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className="w-full py-12 md:py-24">
+      <section id="pricing" className="w-full py-12 md:py-24">
         <div className="container px-4 md:px-6 mx-auto">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -354,7 +357,7 @@ const Landing = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="w-full py-12 md:py-24 bg-muted/30">
+      <section id="faq" className="w-full py-12 md:py-24 bg-muted/30">
         <div className="container px-4 md:px-6 mx-auto">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
