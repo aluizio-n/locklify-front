@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Shield, Play, Check, ChevronDown, ChevronUp } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { PricingButton } from "@/components/pricing-button";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Landing = () => {
                 Segurança de primeiro nível
               </div>
               <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                Secure sVault
+                Locklify
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
                 Gerencie todas as suas senhas com segurança e facilidade. Nunca mais esqueça uma senha ou comprometa sua segurança online.
@@ -79,10 +80,10 @@ const Landing = () => {
                 Como funciona
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Veja o Secure sVault em ação
+                Veja o Locklify em ação
               </h2>
               <p className="max-w-[600px] text-muted-foreground md:text-xl mx-auto">
-                Uma demonstração rápida de como o Secure sVault protege suas informações.
+                Uma demonstração rápida de como o Locklify protege suas informações.
               </p>
             </div>
             <div className="rounded-xl overflow-hidden border shadow-xl w-full max-w-4xl aspect-video relative bg-card mt-8">
@@ -140,9 +141,9 @@ const Landing = () => {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full" variant="outline" onClick={() => navigate("/register")}>
+                  <PricingButton className="w-full" variant="outline" plan="basic">
                     Começar Agora
-                  </Button>
+                  </PricingButton>
                 </CardFooter>
               </Card>
 
@@ -162,6 +163,9 @@ const Landing = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
+                  <div className="mb-4 bg-primary/10 text-primary px-3 py-2 rounded-md text-sm">
+                    Teste gratuito de 15 dias
+                  </div>
                   <ul className="space-y-2 mt-4">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-primary mr-2" />
@@ -186,9 +190,9 @@ const Landing = () => {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full" onClick={() => navigate("/register")}>
+                  <PricingButton className="w-full" plan="premium">
                     Começar Teste Gratuito
-                  </Button>
+                  </PricingButton>
                 </CardFooter>
               </Card>
 
@@ -252,7 +256,7 @@ const Landing = () => {
                 Perguntas Frequentes
               </h2>
               <p className="max-w-[600px] text-muted-foreground md:text-xl mx-auto">
-                Respostas para as dúvidas mais comuns sobre o Secure sVault.
+                Respostas para as dúvidas mais comuns sobre o Locklify.
               </p>
             </div>
             <div className="w-full max-w-3xl mx-auto mt-8">
@@ -284,13 +288,13 @@ const Landing = () => {
                 <AccordionItem value="item-5">
                   <AccordionTrigger>Posso compartilhar senhas com outras pessoas de forma segura?</AccordionTrigger>
                   <AccordionContent>
-                    Sim, nos planos Premium e Empresarial você pode compartilhar senhas específicas com outros usuários do Secure sVault sem comprometer a segurança. O compartilhamento é encriptado e pode ser revogado a qualquer momento.
+                    Sim, nos planos Premium e Empresarial você pode compartilhar senhas específicas com outros usuários do Locklify sem comprometer a segurança. O compartilhamento é encriptado e pode ser revogado a qualquer momento.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-6">
                   <AccordionTrigger>Como posso migrar de outro gerenciador de senhas?</AccordionTrigger>
                   <AccordionContent>
-                    O Secure sVault oferece ferramentas de importação para os principais gerenciadores de senhas do mercado. Basta exportar suas senhas do seu gerenciador atual e importá-las para o Secure sVault em poucos cliques.
+                    O Locklify oferece ferramentas de importação para os principais gerenciadores de senhas do mercado. Basta exportar suas senhas do seu gerenciador atual e importá-las para o Locklify em poucos cliques.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -308,7 +312,7 @@ const Landing = () => {
                 Pronto para proteger suas senhas?
               </h2>
               <p className="max-w-[600px] md:text-xl mx-auto opacity-90">
-                Junte-se a milhares de usuários que já confiam no Secure sVault para gerenciar suas senhas com segurança.
+                Junte-se a milhares de usuários que já confiam no Locklify para gerenciar suas senhas com segurança.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mt-6">
@@ -363,10 +367,10 @@ const Landing = () => {
           <div className="flex flex-col md:flex-row justify-between items-center mt-8 pt-8 border-t">
             <div className="flex items-center">
               <Shield className="h-6 w-6 mr-2 text-primary" />
-              <span className="text-lg font-bold">Secure sVault</span>
+              <span className="text-lg font-bold">Locklify</span>
             </div>
             <p className="text-sm text-muted-foreground mt-4 md:mt-0">
-              © 2024 Secure sVault. Todos os direitos reservados.
+              © 2024 Locklify. Todos os direitos reservados.
             </p>
           </div>
         </div>
