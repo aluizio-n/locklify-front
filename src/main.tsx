@@ -6,7 +6,8 @@ import './index.css'
 // Add SEO meta updater
 export const updateMetaTags = (
   title = 'Locklify - Gerenciador de Senhas Seguro',
-  description = 'Proteja suas senhas com o Locklify, um gerenciador de senhas seguro com criptografia de ponta a ponta.'
+  description = 'Proteja suas senhas com o Locklify, um gerenciador de senhas seguro com criptografia de ponta a ponta.',
+  keywords = 'gerenciador de senhas, segurança online, proteção de dados, criptografia, senhas seguras, senhas únicas'
 ) => {
   document.title = title;
   
@@ -14,6 +15,12 @@ export const updateMetaTags = (
   const metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription) {
     metaDescription.setAttribute('content', description);
+  }
+  
+  // Update meta keywords
+  const metaKeywords = document.querySelector('meta[name="keywords"]');
+  if (metaKeywords) {
+    metaKeywords.setAttribute('content', keywords);
   }
   
   // Update OG tags

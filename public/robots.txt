@@ -14,3 +14,6 @@ Disallow: /edit-password
 # Sitemap (we should create one in the future)
 # Sitemap: https://locklify.com/sitemap.xml
 
+# Emphasize the importance of unique passwords
+# This is a comment for humans reading the robots.txt
+# Security best practice: Use a unique password for each website and service

@@ -1,10 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Play, Check, ChevronDown, ChevronUp } from "lucide-react";
+import { Shield, Play, Check, ChevronDown, ChevronUp, Lock, Key, AlertTriangle } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { PricingButton } from "@/components/pricing-button";
+import SEO from "@/components/seo";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -16,19 +17,28 @@ const Landing = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
+      <SEO 
+        title="Locklify - Use senhas únicas para cada conta e fique seguro" 
+        description="Gerenciador de senhas seguro que ajuda você a criar e gerenciar senhas únicas para cada serviço, evitando os riscos de usar a mesma senha em vários lugares."
+        path="/"
+      />
+      
       {/* Hero Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
         <div className="container px-4 md:px-6 mx-auto">
           <div className="grid gap-6 lg:grid-cols-2 items-center">
             <div className="flex flex-col justify-center space-y-4">
-              <div className="inline-block px-4 py-1.5 mb-4 text-sm font-medium border rounded-full bg-primary text-primary-foreground">
-                Segurança de primeiro nível
+              <div className="inline-block px-4 py-1.5 mb-4 text-sm font-medium border rounded-full bg-red-100 text-red-800 border-red-200">
+                <div className="flex items-center">
+                  <AlertTriangle className="w-4 h-4 mr-1" />
+                  <span>Alerta de Segurança</span>
+                </div>
               </div>
               <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                Locklify
+                Uma senha única para cada conta
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                Gerencie todas as suas senhas com segurança e facilidade. Nunca mais esqueça uma senha ou comprometa sua segurança online.
+                <span className="font-semibold text-red-600">81% das violações de dados acontecem por reutilização de senhas.</span> O Locklify cria e gerencia senhas únicas e fortes para cada serviço, protegendo você contra ataques em cascata.
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Button size="lg" onClick={() => navigate("/register")}>
@@ -38,11 +48,19 @@ const Landing = () => {
                   Já tenho uma conta
                 </Button>
               </div>
-              <div className="flex items-center gap-1 text-sm">
-                <Check className="w-4 h-4 text-primary" />
-                <p>Sincronização entre dispositivos</p>
-                <Check className="ml-4 w-4 h-4 text-primary" />
-                <p>Criptografia de ponta a ponta</p>
+              <div className="flex flex-wrap items-center gap-3 text-sm">
+                <div className="flex items-center">
+                  <Check className="w-4 h-4 text-primary" />
+                  <p className="ml-1">Senhas únicas para cada site</p>
+                </div>
+                <div className="flex items-center">
+                  <Check className="w-4 h-4 text-primary" />
+                  <p className="ml-1">Gerador de senhas fortes</p>
+                </div>
+                <div className="flex items-center">
+                  <Check className="w-4 h-4 text-primary" />
+                  <p className="ml-1">Criptografia de ponta a ponta</p>
+                </div>
               </div>
             </div>
             <div className="flex justify-center lg:justify-end">
@@ -64,6 +82,95 @@ const Landing = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Password Security Risk Section - New Section */}
+      <section className="w-full py-12 md:py-24 bg-red-50">
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">
+              O perigo de usar a mesma senha
+            </h2>
+            <p className="max-w-[800px] mx-auto text-muted-foreground md:text-xl">
+              Quando você usa a mesma senha em vários lugares, se um site for comprometido, <span className="font-semibold">todas as suas contas estão em risco</span>.
+            </p>
+          </div>
+          
+          <div className="grid gap-8 md:grid-cols-3">
+            <Card className="bg-white">
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-2">
+                  <Key className="h-6 w-6 text-red-600" />
+                </div>
+                <CardTitle>Uma senha = Múltiplos riscos</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>Usar a mesma senha em vários sites significa que se um site for hackeado, todas as suas contas ficam vulneráveis ao mesmo tempo.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white">
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-2">
+                  <AlertTriangle className="h-6 w-6 text-red-600" />
+                </div>
+                <CardTitle>Ataques de "credential stuffing"</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>Hackers usam credenciais vazadas para tentar acessar várias de suas contas automaticamente, e geralmente conseguem.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white">
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-2">
+                  <Lock className="h-6 w-6 text-red-600" />
+                </div>
+                <CardTitle>Memória limitada</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>É humanamente impossível memorizar dezenas de senhas fortes e diferentes, por isso a maioria das pessoas acaba reutilizando senhas.</p>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <h3 className="text-2xl font-bold mb-4">Como o Locklify resolve esse problema:</h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-6">
+              <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                  <Key className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-semibold mb-2">Senha única para cada site</h4>
+                <p className="text-sm text-muted-foreground">Gera automaticamente senhas fortes e diferentes para cada site que você usa.</p>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                  <Lock className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-semibold mb-2">Uma senha mestra</h4>
+                <p className="text-sm text-muted-foreground">Você só precisa lembrar de uma senha - o Locklify cuida do resto.</p>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                  <Shield className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-semibold mb-2">Criptografia avançada</h4>
+                <p className="text-sm text-muted-foreground">Suas senhas são criptografadas com os mais altos padrões de segurança.</p>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                  <AlertTriangle className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-semibold mb-2">Alertas de violação</h4>
+                <p className="text-sm text-muted-foreground">Receba alertas quando seus dados aparecerem em vazamentos conhecidos.</p>
               </div>
             </div>
           </div>
@@ -267,33 +374,39 @@ const Landing = () => {
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
+                  <AccordionTrigger>Por que preciso de senhas diferentes para cada site?</AccordionTrigger>
+                  <AccordionContent>
+                    Quando você utiliza a mesma senha em vários lugares, basta que um único site seja comprometido para que todas as suas contas fiquem vulneráveis. Hackers frequentemente testam senhas vazadas em outros serviços. Com o Locklify, você tem senhas únicas para cada serviço, limitando o impacto de possíveis vazamentos.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>Como conseguirei lembrar de tantas senhas diferentes?</AccordionTrigger>
+                  <AccordionContent>
+                    Você não precisa! Essa é a beleza do Locklify. Você só precisa lembrar de uma única senha mestra para acessar o Locklify. Nossa aplicação cuida de todas as outras senhas para você, gerando, armazenando e preenchendo automaticamente quando necessário.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-4">
                   <AccordionTrigger>Posso acessar minhas senhas offline?</AccordionTrigger>
                   <AccordionContent>
                     Sim, uma vez que você tenha feito login, suas senhas são armazenadas localmente de forma segura. Você pode acessá-las mesmo sem conexão com a internet.
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-3">
+                <AccordionItem value="item-5">
                   <AccordionTrigger>Como funciona a sincronização entre dispositivos?</AccordionTrigger>
                   <AccordionContent>
                     Quando você adiciona ou atualiza uma senha em um dispositivo, nossa tecnologia sincroniza automaticamente essas alterações em todos os seus dispositivos logados, mantendo tudo atualizado.
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-4">
+                <AccordionItem value="item-6">
                   <AccordionTrigger>O que acontece se eu esquecer minha senha mestra?</AccordionTrigger>
                   <AccordionContent>
                     Por motivos de segurança, não armazenamos sua senha mestra em lugar nenhum. Recomendamos que você configure perguntas de recuperação e mantenha um método alternativo de autenticação ativo.
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-5">
-                  <AccordionTrigger>Posso compartilhar senhas com outras pessoas de forma segura?</AccordionTrigger>
+                <AccordionItem value="item-7">
+                  <AccordionTrigger>As minhas senhas atuais são seguras?</AccordionTrigger>
                   <AccordionContent>
-                    Sim, nos planos Premium e Empresarial você pode compartilhar senhas específicas com outros usuários do Locklify sem comprometer a segurança. O compartilhamento é encriptado e pode ser revogado a qualquer momento.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-6">
-                  <AccordionTrigger>Como posso migrar de outro gerenciador de senhas?</AccordionTrigger>
-                  <AccordionContent>
-                    O Locklify oferece ferramentas de importação para os principais gerenciadores de senhas do mercado. Basta exportar suas senhas do seu gerenciador atual e importá-las para o Locklify em poucos cliques.
+                    O Locklify inclui uma ferramenta de análise de senhas que verifica a força das suas senhas existentes e alerta sobre senhas fracas, reutilizadas ou que apareceram em vazamentos de dados conhecidos, ajudando você a identificar e corrigir vulnerabilidades.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -308,10 +421,10 @@ const Landing = () => {
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Pronto para proteger suas senhas?
+                Uma senha diferente para cada conta - comece agora!
               </h2>
               <p className="max-w-[600px] md:text-xl mx-auto opacity-90">
-                Junte-se a milhares de usuários que já confiam no Locklify para gerenciar suas senhas com segurança.
+                Não arrisque sua segurança online usando a mesma senha em vários lugares. O Locklify torna fácil usar senhas únicas e fortes para cada serviço.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mt-6">
