@@ -183,7 +183,7 @@ export default function EditPassword() {
 
                 {showGenerator && (
                   <div className="py-2">
-                    <PasswordGenerator onPasswordGenerated={handleGeneratedPassword} />
+                    <PasswordGenerator onGeneratePassword={handleGeneratedPassword} />
                   </div>
                 )}
 
