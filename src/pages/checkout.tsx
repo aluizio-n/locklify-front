@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -44,7 +44,45 @@ const checkoutSchema = z.object({
 
 type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 
-const PlanDetails = ({ name, price, features }: { name: string; price: string; features: string[] }) => (
+interface PlanDetailsProps {
+  name: string;
+  price: string;
+  features: string[];
+}
+
+const planFeatures = {
+  basic: [
+    "Até 15 senhas",
+    "Gerador de senhas",
+    "Acesso em 1 dispositivo"
+  ],
+  premium: [
+    "Senhas ilimitadas",
+    "Sincronização em até 5 dispositivos",
+    "Gerador de senhas avançado",
+    "Verificador de violação de dados",
+    "Compartilhamento seguro"
+  ],
+  lifetime: [
+    "Tudo do plano Premium",
+    "Dispositivos ilimitados",
+    "Acesso vitalício a atualizações",
+    "Autenticação de dois fatores avançada",
+    "Relatórios de segurança",
+    "Suporte prioritário"
+  ]
+};
+
+const getPlanName = (plan: string): string => {
+  switch (plan) {
+    case "basic": return "Plano Básico";
+    case "premium": return "Plano Premium";
+    case "lifetime": return "Plano Vitalício";
+    default: return "Plano Premium";
+  }
+};
+
+const PlanDetails = ({ name, price, features }: PlanDetailsProps) => (
   <div className="border rounded-lg p-4 mb-4">
     <div className="flex justify-between items-center mb-2">
       <h3 className="font-bold text-lg">{name}</h3>
@@ -66,6 +104,14 @@ const PlanDetails = ({ name, price, features }: { name: string; price: string; f
 const Checkout = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  const queryParams = new URLSearchParams(location.search);
+  const plan = queryParams.get("plan") || "premium";
+  const price = queryParams.get("price") || "45";
+  
+  const planName = getPlanName(plan);
+  const selectedPlanFeatures = planFeatures[plan as keyof typeof planFeatures] || planFeatures.premium;
   
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
@@ -313,21 +359,15 @@ const Checkout = () => {
             <div className="space-y-4 md:mt-9">
               
               <PlanDetails 
-                name="Plano Premium" 
-                price="R$ 45,00" 
-                features={[
-                  "Armazenamento ilimitado de senhas",
-                  "Sincronização entre dispositivos",
-                  "Gerador de senha avançado",
-                  "Verificador de senhas vazadas",
-                  "Compartilhamento seguro"
-                ]} 
+                name={planName} 
+                price={`R$ ${price},00`} 
+                features={selectedPlanFeatures} 
               />
               
               <div className="border rounded-lg p-4">
                 <div className="flex justify-between mb-2">
                   <span>Subtotal</span>
-                  <span>R$ 45,00</span>
+                  <span>R$ {price},00</span>
                 </div>
                 <div className="flex justify-between mb-2">
                   <span>Impostos</span>
@@ -336,7 +376,7 @@ const Checkout = () => {
                 <Separator className="my-3" />
                 <div className="flex justify-between font-bold">
                   <span>Total</span>
-                  <span>R$ 45,00</span>
+                  <span>R$ {price},00</span>
                 </div>
               </div>
               
