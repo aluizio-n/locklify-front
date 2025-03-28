@@ -36,4 +36,8 @@ export const updateMetaTags = (
   }
 };
 
-createRoot(document.getElementById("root")!).render(<App />);
+// Get root element and only create root if it doesn't exist
+const rootElement = document.getElementById("root");
+if (!rootElement?._reactRootContainer) {
+  createRoot(rootElement!).render(<App />);
+}
