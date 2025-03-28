@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -158,7 +157,7 @@ const Landing = () => {
                     <div className="inline-block px-3 py-1 text-sm rounded-full bg-primary/20 text-primary">Recomendado</div>
                   </div>
                   <div className="mt-4 flex items-baseline">
-                    <span className="text-4xl font-bold">R$25</span>
+                    <span className="text-4xl font-bold">R$45</span>
                     <span className="ml-1 text-muted-foreground">/mês</span>
                   </div>
                 </CardHeader>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,7 +26,6 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 
-// Schema para validação de formulário
 const checkoutSchema = z.object({
   cardNumber: z.string()
     .min(16, "O número do cartão deve ter pelo menos 16 dígitos")
@@ -46,8 +44,7 @@ const checkoutSchema = z.object({
 
 type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 
-// Componente para o plano de assinatura
-const PlanDetails = ({ name, price, features }: { name: string, price: string, features: string[] }) => (
+const PlanDetails = ({ name, price, features }: { name: string; price: string; features: string[] }) => (
   <div className="border rounded-lg p-4 mb-4">
     <div className="flex justify-between items-center mb-2">
       <h3 className="font-bold text-lg">{name}</h3>
@@ -66,7 +63,7 @@ const PlanDetails = ({ name, price, features }: { name: string, price: string, f
   </div>
 );
 
-export default function Checkout() {
+const Checkout = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
   
@@ -87,7 +84,6 @@ export default function Checkout() {
     let value = e.target.value.replace(/\s/g, '');
     if (value.length > 16) value = value.substr(0, 16);
     
-    // Add space after every 4 digits
     const formattedValue = value.replace(/(\d{4})(?=\d)/g, '$1 ');
     form.setValue('cardNumber', formattedValue);
   };
@@ -106,10 +102,8 @@ export default function Checkout() {
     setIsProcessing(true);
     
     try {
-      // Simulando integração com o Stripe
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Feedback para o usuário
       toast.success("Pagamento processado com sucesso!");
       navigate("/dashboard");
     } catch (error) {
@@ -120,7 +114,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="flex flex-col min-h-screen">
       <header className="border-b">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <Button 
@@ -135,11 +129,11 @@ export default function Checkout() {
         </div>
       </header>
       
-      <main className="flex-1 container mx-auto px-4 py-8">
-        <div className="max-w-5xl mx-auto">
+      <div className="flex-1">
+        <div className="container max-w-6xl px-4 md:px-6 py-6">
           <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2">
               <Card>
                 <CardHeader>
@@ -316,46 +310,43 @@ export default function Checkout() {
               </Card>
             </div>
             
-            <div>
-              <div className="sticky top-4">
-                <h2 className="text-xl font-bold mb-4">Resumo do Pedido</h2>
-                
-                <PlanDetails 
-                  name="Plano Premium" 
-                  price="R$ 25,00" 
-                  features={[
-                    "Armazenamento ilimitado de senhas",
-                    "Sincronização entre dispositivos",
-                    "Alertas de segurança",
-                    "Backups automáticos",
-                    "Suporte prioritário"
-                  ]} 
-                />
-                
-                <div className="border rounded-lg p-4">
-                  <div className="flex justify-between mb-2">
-                    <span>Subtotal</span>
-                    <span>R$ 25,00</span>
-                  </div>
-                  <div className="flex justify-between mb-2">
-                    <span>Impostos</span>
-                    <span>R$ 0,00</span>
-                  </div>
-                  <Separator className="my-3" />
-                  <div className="flex justify-between font-bold">
-                    <span>Total</span>
-                    <span>R$ 25,00</span>
-                  </div>
+            <div className="space-y-4 md:mt-9">
+              
+              <PlanDetails 
+                name="Plano Premium" 
+                price="R$ 45,00" 
+                features={[
+                  "Armazenamento ilimitado de senhas",
+                  "Sincronização entre dispositivos",
+                  "Gerador de senha avançado",
+                  "Verificador de senhas vazadas",
+                  "Compartilhamento seguro"
+                ]} 
+              />
+              
+              <div className="border rounded-lg p-4">
+                <div className="flex justify-between mb-2">
+                  <span>Subtotal</span>
+                  <span>R$ 45,00</span>
                 </div>
-                
-                <div className="mt-4 text-sm text-muted-foreground">
-                  <p>Ao finalizar o pagamento, você concorda com nossos Termos de Serviço e Política de Privacidade.</p>
+                <div className="flex justify-between mb-2">
+                  <span>Impostos</span>
+                  <span>R$ 0,00</span>
                 </div>
+                <Separator className="my-3" />
+                <div className="flex justify-between font-bold">
+                  <span>Total</span>
+                  <span>R$ 45,00</span>
+                </div>
+              </div>
+              
+              <div className="mt-4 text-sm text-muted-foreground">
+                <p>Ao finalizar o pagamento, você concorda com nossos Termos de Serviço e Política de Privacidade.</p>
               </div>
             </div>
           </div>
         </div>
-      </main>
+      </div>
       
       <footer className="border-t py-6">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
@@ -368,4 +359,6 @@ export default function Checkout() {
       </footer>
     </div>
   );
-}
+};
+
+export default Checkout;
