@@ -57,7 +57,7 @@ export default function Login() {
                 <KeyRound className="h-6 w-6 text-white" />
               </div>
             </div>
-            <CardTitle className="text-2xl font-bold">Secure Vault</CardTitle>
+            <CardTitle className="text-2xl font-bold">Locklify</CardTitle>
             <CardDescription>
               Entre com suas credenciais para acessar
             </CardDescription>

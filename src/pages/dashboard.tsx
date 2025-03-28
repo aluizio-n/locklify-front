@@ -40,7 +40,7 @@ export default function Dashboard() {
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Key className="h-6 w-6" />
-            <h1 className="text-xl font-bold">Secure Vault</h1>
+            <h1 className="text-xl font-bold">Locklify</h1>
           </div>
           <div className="flex items-center space-x-2">
             <ThemeToggle />

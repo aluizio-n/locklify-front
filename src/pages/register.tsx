@@ -84,7 +84,7 @@ export default function Register() {
             </div>
             <CardTitle className="text-2xl font-bold">Criar conta</CardTitle>
             <CardDescription>
-              Preencha os dados abaixo para criar sua conta
+              Preencha os dados abaixo para criar sua conta no Locklify
             </CardDescription>
           </CardHeader>
           <CardContent>

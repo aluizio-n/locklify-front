@@ -26,7 +26,7 @@ const Index = () => {
           <Shield className="h-20 w-20 mx-auto mb-4 text-primary" />
         </div>
         
-        <h1 className="text-4xl font-bold mb-4">Secure sVault</h1>
+        <h1 className="text-4xl font-bold mb-4">Locklify</h1>
         <p className="text-xl mb-8 max-w-md text-muted-foreground">
           Gerenciador de senhas seguro e fácil de usar para proteger todas as suas informações de acesso.
         </p>
@@ -69,7 +69,7 @@ const Index = () => {
       </main>
       
       <footer className="p-4 text-center text-sm text-muted-foreground">
-        © 2024 Secure sVault - Todos os direitos reservados
+        © 2024 Locklify - Todos os direitos reservados
       </footer>
     </div>
   );
