@@ -36,8 +36,10 @@ export const updateMetaTags = (
   }
 };
 
-// Get root element and only create root if it doesn't exist
+// Get root element and create root if it doesn't exist
 const rootElement = document.getElementById("root");
-if (!rootElement?._reactRootContainer) {
-  createRoot(rootElement!).render(<App />);
+if (rootElement && !rootElement.hasAttribute('data-react-root')) {
+  const root = createRoot(rootElement);
+  rootElement.setAttribute('data-react-root', 'true');
+  root.render(<App />);
 }
