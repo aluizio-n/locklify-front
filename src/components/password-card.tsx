@@ -1,13 +1,14 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Copy, Trash, Edit, ExternalLink } from "lucide-react";
+import { Eye, EyeOff, Copy, Trash, Edit, ExternalLink, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { toast } from "sonner";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { PasswordEntry, usePasswords } from "@/contexts/passwords-context";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface PasswordCardProps {
   password: PasswordEntry;
@@ -49,30 +50,58 @@ export default function PasswordCard({ password }: PasswordCardProps) {
     }
   };
 
+  // Get domain from URL for favicon
+  const getServiceIcon = () => {
+    if (password.url) {
+      try {
+        const url = new URL(password.url.startsWith('http') ? password.url : `https://${password.url}`);
+        return `https://www.google.com/s2/favicons?domain=${url.hostname}&sz=32`;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  };
+
+  const serviceIcon = getServiceIcon();
+  const serviceName = password.serviceName;
+  const serviceInitial = serviceName.charAt(0).toUpperCase();
+
   return (
     <Card className="border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow transition-shadow">
       <CardContent className="p-4">
         <div className="flex items-start justify-between mb-2">
-          <div>
-            <h3 className="font-bold text-lg truncate">{password.serviceName}</h3>
-            <div className="flex items-center mt-1">
-              <p className="text-sm text-slate-500 dark:text-slate-400 truncate">
-                {password.username}
-              </p>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-6 w-6 p-0 ml-1"
-                    onClick={handleCopyUsername}
-                  >
-                    <Copy className="h-3 w-3" />
-                    <span className="sr-only">Copiar usuário</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Copiar usuário</TooltipContent>
-              </Tooltip>
+          <div className="flex items-center gap-2">
+            <Avatar className="h-8 w-8 border border-slate-200 dark:border-slate-700">
+              {serviceIcon ? (
+                <img src={serviceIcon} alt={serviceName} className="h-full w-full object-contain" />
+              ) : (
+                <AvatarFallback className="bg-primary text-primary-foreground text-sm">
+                  {serviceInitial}
+                </AvatarFallback>
+              )}
+            </Avatar>
+            <div>
+              <h3 className="font-bold text-lg truncate">{password.serviceName}</h3>
+              <div className="flex items-center mt-1">
+                <p className="text-sm text-slate-500 dark:text-slate-400 truncate">
+                  {password.username}
+                </p>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0 ml-1"
+                      onClick={handleCopyUsername}
+                    >
+                      <Copy className="h-3 w-3" />
+                      <span className="sr-only">Copiar usuário</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Copiar usuário</TooltipContent>
+                </Tooltip>
+              </div>
             </div>
           </div>
           {password.url && (
