@@ -62,7 +62,7 @@ export default function Register() {
     const success = await register(data.name, data.email, data.password);
     if (success) {
       toast.success("Conta criada com sucesso");
-      navigate("/dashboard");
+      navigate("/login");
     } else {
       toast.error("Falha ao criar conta. Este email já pode estar em uso.");
     }
