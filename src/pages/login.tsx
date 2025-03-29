@@ -34,12 +34,27 @@ export default function Login() {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
-    const success = await login(data.email, data.password);
-    if (success) {
-      toast.success("Login realizado com sucesso");
-      navigate("/dashboard");
-    } else {
-      toast.error("Email ou senha incorretos");
+    console.log("Tentando login com:", data);
+  
+    try {
+      const success = await login(data.email, data.password);
+      console.log("Resultado do login:", success);
+  
+      if (success) {
+        toast.success("Login realizado com sucesso");
+        
+        // Adicionando um delay para garantir que o estado foi atualizado
+        setTimeout(() => {
+          console.log("Redirecionando para /dashboard...");
+          navigate("/dashboard");
+        }, 500);
+        
+      } else {
+        toast.error("Email ou senha incorretos");
+      }
+    } catch (error) {
+      console.error("Erro no login:", error);
+      toast.error("Erro ao tentar fazer login");
     }
   };
 

@@ -215,6 +215,7 @@ export const api = {
             'Content-Type': 'application/json',
           },
           credentials: 'include',
+          body: JSON.stringify({}), 
         });
 
         if (!response.ok) {
