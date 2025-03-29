@@ -31,7 +31,7 @@ const Landing = () => {
         <div className="container px-4 md:px-6 mx-auto">
           <div className="grid gap-6 lg:grid-cols-2 items-center">
             <div className="flex flex-col justify-center space-y-4">
-              <div className="inline-block px-4 py-1.5 mb-4 text-sm font-medium border rounded-full bg-red-100 text-red-800 border-red-200">
+              <div className="inline-block px-4 py-1.5 mb-4 text-sm font-medium border rounded-full bg-red-800 text-white border-red-800">
                 <div className="flex items-center">
                   <AlertTriangle className="w-4 h-4 mr-1" />
                   <span>Alerta de Segurança</span>
