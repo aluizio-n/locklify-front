@@ -7,7 +7,7 @@ export interface PasswordEntry {
   id: string;
   userId: string;
   serviceName: string;
-  username: string;
+  email: string;
   password: string;
   url?: string;
   notes?: string;
@@ -48,18 +48,26 @@ export function PasswordsProvider({ children }: { children: React.ReactNode }) {
     }
   }, [user]);
 
-  const loadPasswords = () => {
+  const loadPasswords = async () => {
     setIsLoading(true);
+  
     try {
-      // In a real app, this would fetch from an API
-      const storedPasswords = localStorage.getItem(`passwords_${user?.id}`);
-      if (storedPasswords) {
-        setPasswords(JSON.parse(storedPasswords));
-      } else {
-        setPasswords([]);
+      const response = await fetch("http://localhost:3000/user/accounts", {
+        method: "GET",
+        credentials: "include", // Importante para enviar cookies
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Falha ao buscar senhas");
       }
+  
+      const data = await response.json();
+      setPasswords(data);
     } catch (error) {
-      console.error("Failed to load passwords:", error);
+      console.error("Erro ao carregar senhas:", error);
       toast.error("Falha ao carregar senhas");
     } finally {
       setIsLoading(false);
@@ -79,25 +87,25 @@ export function PasswordsProvider({ children }: { children: React.ReactNode }) {
     
     setIsLoading(true);
     try {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
+      const response = await fetch("http://localhost:3000/account/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Permite enviar cookies automaticamente
+        body: JSON.stringify(data),
+      });
+      console.log("data:",data)
       
-      const now = new Date().toISOString();
-      const newPassword: PasswordEntry = {
-        id: crypto.randomUUID(),
-        userId: user.id,
-        ...data,
-        createdAt: now,
-        updatedAt: now,
-      };
-      
-      const updatedPasswords = [...passwords, newPassword];
-      setPasswords(updatedPasswords);
-      savePasswords(updatedPasswords);
+      if (!response.ok) {
+        throw new Error("Erro ao adicionar senha");
+      }
+  
+      toast.success("Senha adicionada com sucesso");
       return true;
     } catch (error) {
-      console.error("Failed to add password:", error);
-      toast.error("Falha ao adicionar senha");
+      console.error("Erro ao adicionar senha:", error);
+      toast.error("Erro ao adicionar senha");
       return false;
     } finally {
       setIsLoading(false);
@@ -109,53 +117,78 @@ export function PasswordsProvider({ children }: { children: React.ReactNode }) {
     data: Partial<Omit<PasswordEntry, "id" | "userId">>
   ): Promise<boolean> => {
     if (!user) return false;
-    
+  
     setIsLoading(true);
     try {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      const updatedPasswords = passwords.map(password => 
-        password.id === id
-          ? { ...password, ...data, updatedAt: new Date().toISOString() }
-          : password
+      const response = await fetch(`http://localhost:3000/account/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Permite enviar cookies automaticamente
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Erro ao atualizar senha");
+      }
+  
+      const updatedPassword = await response.json();
+      const updatedPasswords = passwords.map((password) =>
+        password.id === id ? { ...password, ...updatedPassword, updatedAt: new Date().toISOString() } : password
       );
-      
+  
       setPasswords(updatedPasswords);
       savePasswords(updatedPasswords);
+  
+      toast.success("Senha atualizada com sucesso");
       return true;
     } catch (error) {
-      console.error("Failed to update password:", error);
+      console.error("Erro ao atualizar senha:", error);
       toast.error("Falha ao atualizar senha");
       return false;
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   const deletePassword = async (id: string): Promise<boolean> => {
     if (!user) return false;
-    
+  
     setIsLoading(true);
     try {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      const updatedPasswords = passwords.filter(password => password.id !== id);
+      const response = await fetch(`http://localhost:3000/account/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Permite enviar cookies automaticamente
+      });
+  
+      if (!response.ok) {
+        throw new Error("Erro ao excluir senha");
+      }
+  
+      const updatedPasswords = passwords.filter((password) => password.id !== id);
+  
       setPasswords(updatedPasswords);
       savePasswords(updatedPasswords);
+  
+      toast.success("Senha excluída com sucesso");
       return true;
     } catch (error) {
-      console.error("Failed to delete password:", error);
+      console.error("Erro ao excluir senha:", error);
       toast.error("Falha ao excluir senha");
       return false;
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   const getPassword = (id: string): PasswordEntry | undefined => {
-    return passwords.find(password => password.id === id);
+    return passwords.find((password) => password.id === id);
   };
 
   return (

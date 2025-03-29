@@ -32,8 +32,8 @@ export default function Dashboard() {
   };
 
   const filteredPasswords = passwords.filter((password) =>
-    password.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    password.username.toLowerCase().includes(searchTerm.toLowerCase())
+    password.serviceName && password.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    password.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (

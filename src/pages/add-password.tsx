@@ -17,7 +17,7 @@ export default function AddPassword() {
   const { addPassword, isLoading } = usePasswords();
   const [formData, setFormData] = useState({
     serviceName: "",
-    username: "",
+    email: "",
     password: "",
     url: "",
     notes: ""
@@ -37,14 +37,14 @@ export default function AddPassword() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.serviceName || !formData.username || !formData.password) {
+    if (!formData.serviceName || !formData.email || !formData.password) {
       toast.error("Por favor, preencha os campos obrigatórios");
       return;
     }
     
     const success = await addPassword({
       serviceName: formData.serviceName,
-      username: formData.username,
+      email: formData.email,
       password: formData.password,
       url: formData.url,
       notes: formData.notes
@@ -93,10 +93,10 @@ export default function AddPassword() {
               <div className="space-y-2">
                 <Label htmlFor="username">Usuário/Email *</Label>
                 <Input
-                  id="username"
-                  name="username"
+                  id="email"
+                  name="email"
                   placeholder="Seu nome de usuário ou email"
-                  value={formData.username}
+                  value={formData.email}
                   onChange={handleChange}
                   required
                 />

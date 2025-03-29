@@ -25,7 +25,7 @@ export default function PasswordCard({ password }: PasswordCardProps) {
   };
 
   const handleCopyUsername = () => {
-    navigator.clipboard.writeText(password.username);
+    navigator.clipboard.writeText(password.email);
     toast.success("Usuário copiado para a área de transferência");
   };
 
@@ -64,8 +64,8 @@ export default function PasswordCard({ password }: PasswordCardProps) {
   };
 
   const serviceIcon = getServiceIcon();
-  const serviceName = password.serviceName;
-  const serviceInitial = serviceName.charAt(0).toUpperCase();
+  const serviceName = password.serviceName || "Desconhecido";
+  const serviceInitial = serviceName ? serviceName.charAt(0).toUpperCase() : "?" ;
 
   return (
     <Card className="border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow transition-shadow">
@@ -85,7 +85,7 @@ export default function PasswordCard({ password }: PasswordCardProps) {
               <h3 className="font-bold text-lg truncate">{password.serviceName}</h3>
               <div className="flex items-center mt-1">
                 <p className="text-sm text-slate-500 dark:text-slate-400 truncate">
-                  {password.username}
+                  {password.email}
                 </p>
                 <Tooltip>
                   <TooltipTrigger asChild>
