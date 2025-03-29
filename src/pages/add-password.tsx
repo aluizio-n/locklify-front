@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePasswords } from "@/contexts/passwords-context";
 import { Button } from "@/components/ui/button";
@@ -51,6 +51,7 @@ export default function AddPassword() {
     });
     
     if (success) {
+      
       toast.success("Senha adicionada com sucesso");
       navigate("/dashboard");
     }

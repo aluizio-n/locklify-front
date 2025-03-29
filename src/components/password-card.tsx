@@ -65,7 +65,7 @@ export default function PasswordCard({ password }: PasswordCardProps) {
 
   const serviceIcon = getServiceIcon();
   const serviceName = password.serviceName || "Desconhecido";
-  const serviceInitial = serviceName ? serviceName.charAt(0).toUpperCase() : "?" ;
+  const serviceInitial = serviceName.trim().charAt(0).toUpperCase() || "?";
 
   return (
     <Card className="border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow transition-shadow">

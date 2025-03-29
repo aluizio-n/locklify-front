@@ -46,14 +46,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   async function login(email: string, password: string) {
     try {
-      console.log("Enviando request de login...");
       const response = await api.auth.login(email, password);
-      console.log("Resposta da API:", response);
-      console.log("Resposta User:", response.user);
   
       if (response && response.user) {
         setUser(response.user);
-        console.log("Usuário autenticado:", response.user);
         return true;
       } else {
         console.log("Usuário não autenticado, retornando false.");

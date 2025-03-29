@@ -33,19 +33,15 @@ export default function Login() {
     },
   });
 
-  const onSubmit = async (data: LoginFormValues) => {
-    console.log("Tentando login com:", data);
-  
+  const onSubmit = async (data: LoginFormValues) => {  
     try {
       const success = await login(data.email, data.password);
-      console.log("Resultado do login:", success);
   
       if (success) {
         toast.success("Login realizado com sucesso");
         
         // Adicionando um delay para garantir que o estado foi atualizado
         setTimeout(() => {
-          console.log("Redirecionando para /dashboard...");
           navigate("/dashboard");
         }, 500);
         

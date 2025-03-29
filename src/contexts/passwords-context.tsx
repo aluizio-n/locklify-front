@@ -18,6 +18,7 @@ export interface PasswordEntry {
 interface PasswordsContextType {
   passwords: PasswordEntry[];
   isLoading: boolean;
+  loadPasswords: () => Promise<void>;
   addPassword: (data: Omit<PasswordEntry, "id" | "userId" | "createdAt" | "updatedAt">) => Promise<boolean>;
   updatePassword: (id: string, data: Partial<Omit<PasswordEntry, "id" | "userId">>) => Promise<boolean>;
   deletePassword: (id: string) => Promise<boolean>;
@@ -73,6 +74,7 @@ export function PasswordsProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(false);
     }
   };
+  
 
   const savePasswords = (updatedPasswords: PasswordEntry[]) => {
     if (user) {
@@ -95,7 +97,6 @@ export function PasswordsProvider({ children }: { children: React.ReactNode }) {
         credentials: "include", // Permite enviar cookies automaticamente
         body: JSON.stringify(data),
       });
-      console.log("data:",data)
       
       if (!response.ok) {
         throw new Error("Erro ao adicionar senha");
@@ -196,6 +197,7 @@ export function PasswordsProvider({ children }: { children: React.ReactNode }) {
       value={{
         passwords,
         isLoading,
+        loadPasswords,
         addPassword,
         updatePassword,
         deletePassword,

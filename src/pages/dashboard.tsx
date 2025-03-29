@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plus, Search, LogOut, User, Key, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,8 +17,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
-  const { passwords, isLoading } = usePasswords();
+  const { passwords, isLoading, loadPasswords } = usePasswords();
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredPasswords, setFilteredPasswords] = useState<PasswordEntry[]>([]);
   const navigate = useNavigate();
 
   const getInitials = (name: string) => {
@@ -31,10 +31,18 @@ export default function Dashboard() {
       .substring(0, 2);
   };
 
-  const filteredPasswords = passwords.filter((password) =>
-    password.serviceName && password.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    password.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    loadPasswords(); // ✅ Chamando a API sempre que o dashboard renderizar
+  }, []);
+
+  // Effect hook to update filtered passwords on password list change or search term change
+  useEffect(() => {
+    const filtered = passwords.filter((password) =>
+      password.serviceName && password.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      password.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredPasswords(filtered);
+  }, [passwords, searchTerm]);  // Trigger when passwords or searchTerm changes
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-800">
@@ -154,10 +162,8 @@ export default function Dashboard() {
               <p className="text-slate-600 dark:text-slate-400 mb-6">
                 Descubra se seus dados foram comprometidos em vazamentos conhecidos e melhore sua segurança online.
               </p>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <EmailBreachChecker />
-                
                 <Card>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 mb-4">
