@@ -121,7 +121,7 @@ export function PasswordsProvider({ children }: { children: React.ReactNode }) {
   
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/account/${id}`, {
+      const response = await fetch(`http://localhost:3000/account/update/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -129,7 +129,8 @@ export function PasswordsProvider({ children }: { children: React.ReactNode }) {
         credentials: "include", // Permite enviar cookies automaticamente
         body: JSON.stringify(data),
       });
-  
+      console.log("data:",data)
+      
       if (!response.ok) {
         throw new Error("Erro ao atualizar senha");
       }

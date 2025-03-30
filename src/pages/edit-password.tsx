@@ -17,7 +17,7 @@ import { PasswordStrength } from "@/components/password-strength";
 
 const passwordSchema = z.object({
   serviceName: z.string().min(1, "Nome do serviço é obrigatório"),
-  username: z.string().min(1, "Nome de usuário ou email é obrigatório"),
+  email: z.string().min(1, "Nome de usuário ou email é obrigatório"),
   password: z.string().min(1, "Senha é obrigatória"),
   url: z.string().optional(),
   notes: z.string().optional(),
@@ -38,7 +38,7 @@ export default function EditPassword() {
     resolver: zodResolver(passwordSchema),
     defaultValues: {
       serviceName: "",
-      username: "",
+      email: "",
       password: "",
       url: "",
       notes: "",
@@ -49,7 +49,7 @@ export default function EditPassword() {
     if (passwordEntry) {
       form.reset({
         serviceName: passwordEntry.serviceName,
-        username: passwordEntry.username,
+        email: passwordEntry.email,
         password: passwordEntry.password,
         url: passwordEntry.url || "",
         notes: passwordEntry.notes || "",
@@ -118,7 +118,7 @@ export default function EditPassword() {
 
                 <FormField
                   control={form.control}
-                  name="username"
+                  name="email"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Nome de usuário ou Email</FormLabel>
