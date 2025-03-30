@@ -51,7 +51,7 @@ const Index = () => {
 
           <Button 
             variant="secondary" 
-            className="w-full py-6 text-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600"
+            className="w-full py-6 text-lg bg-slate-500 hover:bg-slate-600 dark:bg-slate-700 dark:hover:bg-slate-600"
             onClick={() => navigate("/checkout")}
           >
             <CreditCard className="mr-2 h-5 w-5" />
