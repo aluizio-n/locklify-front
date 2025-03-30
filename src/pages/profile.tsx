@@ -49,7 +49,7 @@ export default function Profile() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { user, updateUser, isLoading } = useAuth();
+  const { user, updateUser, isLoading, updatePassword } = useAuth();
   const navigate = useNavigate();
 
   const profileForm = useForm<ProfileFormValues>({
@@ -83,9 +83,15 @@ export default function Profile() {
   };
 
   const onPasswordSubmit = async (data: PasswordFormValues) => {
-    // In a real app, this would send the password update to an API
-    // This is just a mock implementation
-    toast.success("Senha atualizada com sucesso");
+    if (!user) return;
+
+    const success = await updatePassword(user.id, data.newPassword, data.currentPassword);
+    console.log("data:", data)
+    if(success){
+      toast.success("Senha atualizada com sucesso");
+    }else{
+      toast.error("Falha ao atualizar senha");
+    }
     passwordForm.reset();
   };
 

@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { api } from "@/services/api";
 import Cookies from "js-cookie";
@@ -15,6 +14,8 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   register: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => Promise<void>;
+  updateUser: (updatedUser: Partial<User>) => Promise<boolean>;
+  updatePassword: (currentPassword: string, newPassword: string, userId:string) => Promise<boolean>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -85,8 +86,38 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const updateUser = async (updatedUser: Partial<User>): Promise<boolean> => {
+    setIsLoading(true);
+    try {
+      const response = await api.users.update(user?.id, updatedUser);
+      if (response) {
+        setUser((prevUser) => ({ ...prevUser, ...updatedUser } as User));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Erro ao atualizar usuário:", error);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updatePassword = async (userId:string, newPassword: string, currentPassword: string): Promise<boolean> => {
+    setIsLoading(true);
+    try {
+      const response = await api.users.updatePassword( userId, newPassword, currentPassword );
+      return response.status === 200;
+    } catch (error) {
+      console.error("Erro ao atualizar senha:", error);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, login, register, logout, updateUser, updatePassword }}>
       {children}
     </AuthContext.Provider>
   );

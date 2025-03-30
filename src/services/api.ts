@@ -306,6 +306,30 @@ export const api = {
       }
     },
 
+    async updatePassword(userId: string, newPassword: string, currentPassword: string): Promise<{status: number}> {
+      try {
+        const response = await fetch(`${API_BASE_URL}/user/update-password/${userId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ newPassword, currentPassword }),
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to update password');
+        }
+
+        return { status: 200 } ;
+      } catch (error) {
+        const errorMessage = handleApiError(error);
+        console.error(`Failed to update password: ${errorMessage}`);
+        return {status: 400};
+      }
+    },
+
     // Delete user
     async delete(userId: string): Promise<void> {
       try {
