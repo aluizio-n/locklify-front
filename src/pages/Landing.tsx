@@ -230,21 +230,21 @@ const Landing = () => {
                   </div>
                   <div className="mt-2 flex items-baseline">
                     <span className="text-3xl font-bold">R$0</span>
-                    <span className="ml-1 text-sm text-muted-foreground">/mês</span>
+                    <span className="ml-1 text-sm text-muted-foreground"> por três dias</span>
                   </div>
                 </CardHeader>
                 <CardContent className="py-2">
                   <ul className="space-y-1 mt-2 text-sm">
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
-                      <span>Até 15 senhas</span>
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
+                      <span>Até 5 senhas</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
                       <span>Gerador de senhas</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
                       <span>Acesso em 1 dispositivo</span>
                     </li>
                   </ul>
@@ -267,42 +267,38 @@ const Landing = () => {
                     <div className="inline-block px-3 py-1 text-xs rounded-full bg-primary text-primary-foreground">Recomendado</div>
                   </div>
                   <div className="mt-2 flex items-baseline">
-                    <span className="text-3xl font-bold">R$200</span>
+                    <span className="text-3xl font-bold">R$150</span>
                     <span className="ml-1 text-sm text-muted-foreground">pagamento único</span>
                   </div>
                 </CardHeader>
                 <CardContent className="py-2">
                   <ul className="space-y-1 mt-2 text-sm">
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
                       <span>Senhas ilimitadas</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
                       <span>Dispositivos ilimitados</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
                       <span>Gerador de senhas avançado</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
                       <span>Verificador de violação de dados</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
-                      <span>Compartilhamento seguro</span>
-                    </li>
-                    <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
                       <span>Acesso vitalício a atualizações</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
                       <span>Relatórios de segurança</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-4 w-4 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary-foreground mr-2" />
                       <span>Suporte prioritário</span>
                     </li>
                   </ul>
