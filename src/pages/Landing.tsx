@@ -220,36 +220,36 @@ const Landing = () => {
                 Escolha o plano que melhor atende às suas necessidades.
               </p>
             </div>
-            <div className="grid gap-8 md:grid-cols-2 w-full max-w-6xl mt-8">
+            <div className="grid gap-8 md:grid-cols-2 w-full max-w-4xl mt-8">
               {/* Free Plan */}
               <Card className="flex flex-col justify-between border-2 h-full">
-                <CardHeader>
+                <CardHeader className="pb-2">
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-xl">Gratuito</CardTitle>
-                    <div className="inline-block px-3 py-1 text-sm rounded-full bg-muted">Básico</div>
+                    <CardTitle className="text-lg">Gratuito</CardTitle>
+                    <div className="inline-block px-3 py-1 text-xs rounded-full bg-muted">Básico</div>
                   </div>
-                  <div className="mt-4 flex items-baseline">
-                    <span className="text-4xl font-bold">R$0</span>
-                    <span className="ml-1 text-muted-foreground">/mês</span>
+                  <div className="mt-2 flex items-baseline">
+                    <span className="text-3xl font-bold">R$0</span>
+                    <span className="ml-1 text-sm text-muted-foreground">/mês</span>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 mt-4">
+                <CardContent className="py-2">
+                  <ul className="space-y-1 mt-2 text-sm">
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Até 15 senhas</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Gerador de senhas</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Acesso em 1 dispositivo</span>
                     </li>
                   </ul>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="pt-2">
                   <PricingButton className="w-full" variant="outline" plan="basic">
                     Começar Agora
                   </PricingButton>
@@ -258,56 +258,56 @@ const Landing = () => {
 
               {/* Lifetime Plan */}
               <Card className="flex flex-col justify-between border-2 border-primary relative h-full">
-                <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-primary text-primary-foreground px-3 py-1 text-sm font-medium rounded-md">
+                <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-primary text-primary-foreground px-2 py-0.5 text-xs font-medium rounded-md">
                   Popular
                 </div>
-                <CardHeader>
+                <CardHeader className="pb-2">
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-xl">Vitalício</CardTitle>
-                    <div className="inline-block px-3 py-1 text-sm rounded-full bg-primary text-primary-foreground">Recomendado</div>
+                    <CardTitle className="text-lg">Vitalício</CardTitle>
+                    <div className="inline-block px-3 py-1 text-xs rounded-full bg-primary text-primary-foreground">Recomendado</div>
                   </div>
-                  <div className="mt-4 flex items-baseline">
-                    <span className="text-4xl font-bold">R$200</span>
-                    <span className="ml-1 text-muted-foreground">pagamento único</span>
+                  <div className="mt-2 flex items-baseline">
+                    <span className="text-3xl font-bold">R$200</span>
+                    <span className="ml-1 text-sm text-muted-foreground">pagamento único</span>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 mt-4">
+                <CardContent className="py-2">
+                  <ul className="space-y-1 mt-2 text-sm">
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Senhas ilimitadas</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Dispositivos ilimitados</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Gerador de senhas avançado</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Verificador de violação de dados</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Compartilhamento seguro</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Acesso vitalício a atualizações</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Relatórios de segurança</span>
                     </li>
                     <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <Check className="h-4 w-4 text-primary mr-2" />
                       <span>Suporte prioritário</span>
                     </li>
                   </ul>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="pt-2">
                   <PricingButton className="w-full" plan="lifetime" price="200">
                     Comprar Agora
                   </PricingButton>
