@@ -26,6 +26,9 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 import SEO from "@/components/seo";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.API_URL);
 
 const checkoutSchema = z.object({
   cardNumber: z.string()
@@ -53,33 +56,27 @@ interface PlanDetailsProps {
 
 const planFeatures = {
   basic: [
-    "Até 15 senhas",
+    "Até 5 senhas",
     "Gerador de senhas",
     "Acesso em 1 dispositivo"
   ],
-  premium: [
+  lifetime: [
     "Senhas ilimitadas",
-    "Sincronização em até 5 dispositivos",
+    "Dispositivos ilimitados",
     "Gerador de senhas avançado",
     "Verificador de violação de dados",
-    "Compartilhamento seguro"
-  ],
-  lifetime: [
-    "Tudo do plano Premium",
-    "Dispositivos ilimitados",
     "Acesso vitalício a atualizações",
-    "Autenticação de dois fatores avançada",
     "Relatórios de segurança",
     "Suporte prioritário"
-  ]
+
+  ],
 };
 
 const getPlanName = (plan: string): string => {
   switch (plan) {
     case "basic": return "Plano Básico";
-    case "premium": return "Plano Premium";
     case "lifetime": return "Plano Vitalício";
-    default: return "Plano Premium";
+    default: return "Plano Vitalício";
   }
 };
 
@@ -89,7 +86,7 @@ const PlanDetails = ({ name, price, features }: PlanDetailsProps) => (
       <h3 className="font-bold text-lg">{name}</h3>
       <span className="text-2xl font-bold">{price}</span>
     </div>
-    <p className="text-muted-foreground mb-3">por mês, cobrado mensalmente</p>
+    <p className="text-muted-foreground mb-3">cobrado uma única vez</p>
     <Separator className="my-3" />
     <ul className="space-y-2">
       {features.map((feature, index) => (
@@ -108,11 +105,11 @@ const Checkout = () => {
   const location = useLocation();
   
   const queryParams = new URLSearchParams(location.search);
-  const plan = queryParams.get("plan") || "premium";
-  const price = queryParams.get("price") || "45";
+  const plan = queryParams.get("plan") || "lifetime";
+  const price = queryParams.get("price") || "150";
   
   const planName = getPlanName(plan);
-  const selectedPlanFeatures = planFeatures[plan as keyof typeof planFeatures] || planFeatures.premium;
+  const selectedPlanFeatures = planFeatures[plan as keyof typeof planFeatures] || planFeatures.lifetime;
   
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
@@ -126,6 +123,36 @@ const Checkout = () => {
       postalCode: "",
     },
   });
+
+  const handleCheckout = async () => {
+    setIsProcessing(true);
+
+    try {
+      const stripe = await stripePromise;
+      if (!stripe) throw new Error("Stripe não foi carregado.");
+
+      // Faz a requisição ao backend para criar a sessão de pagamento
+      const response = await fetch(`${import.meta.env.API_URL}/checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan, price }),
+      });
+
+      if (!response.ok) throw new Error("Falha ao iniciar o pagamento.");
+      const { id } = await response.json();
+
+      // Redireciona para o checkout seguro da Stripe
+      const { error } = await stripe.redirectToCheckout({ sessionId: id });
+
+      if (error) throw new Error(error.message);
+    } catch (error) {
+      toast.error("Erro ao processar pagamento. Tente novamente.");
+      console.error(error);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
 
   const handleCardNumberInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\s/g, '');
@@ -352,6 +379,7 @@ const Checkout = () => {
                           </div>
 
                           <Button
+                            onClick={handleCheckout}
                             type="submit"
                             className="w-full bg-slate-800 hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600"
                             disabled={isProcessing}

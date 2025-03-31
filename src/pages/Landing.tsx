@@ -304,7 +304,7 @@ const Landing = () => {
                   </ul>
                 </CardContent>
                 <CardFooter className="pt-2">
-                  <PricingButton className="w-full" plan="lifetime" price="200">
+                  <PricingButton className="w-full" plan="lifetime" price="150">
                     Comprar Agora
                   </PricingButton>
                 </CardFooter>

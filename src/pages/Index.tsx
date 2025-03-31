@@ -55,7 +55,7 @@ const Index = () => {
             onClick={() => navigate("/checkout")}
           >
             <CreditCard className="mr-2 h-5 w-5" />
-            Assinar Premium
+            Assinar plano
           </Button>
         </div>
         
