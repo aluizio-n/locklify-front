@@ -8,8 +8,8 @@ interface PricingButtonProps extends ButtonProps {
 }
 
 export function PricingButton({ 
-  plan = "premium", 
-  price = "45",
+  plan = "lifetime", 
+  price = "200",
   children, 
   ...props 
 }: PricingButtonProps) {

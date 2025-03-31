@@ -220,7 +220,7 @@ const Landing = () => {
                 Escolha o plano que melhor atende às suas necessidades.
               </p>
             </div>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl mt-8">
+            <div className="grid gap-8 md:grid-cols-2 w-full max-w-6xl mt-8">
               {/* Free Plan */}
               <Card className="flex flex-col justify-between border-2 h-full">
                 <CardHeader>
@@ -256,25 +256,22 @@ const Landing = () => {
                 </CardFooter>
               </Card>
 
-              {/* Premium Plan */}
+              {/* Lifetime Plan */}
               <Card className="flex flex-col justify-between border-2 border-primary relative h-full">
                 <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-primary text-primary-foreground px-3 py-1 text-sm font-medium rounded-md">
                   Popular
                 </div>
                 <CardHeader>
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-xl">Premium</CardTitle>
+                    <CardTitle className="text-xl">Vitalício</CardTitle>
                     <div className="inline-block px-3 py-1 text-sm rounded-full bg-primary text-primary-foreground">Recomendado</div>
                   </div>
                   <div className="mt-4 flex items-baseline">
-                    <span className="text-4xl font-bold">R$45</span>
-                    <span className="ml-1 text-muted-foreground">/mês</span>
+                    <span className="text-4xl font-bold">R$200</span>
+                    <span className="ml-1 text-muted-foreground">pagamento único</span>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="mb-4 bg-primary text-primary-foreground px-3 py-2 rounded-md text-sm">
-                    Teste gratuito de 15 dias
-                  </div>
                   <ul className="space-y-2 mt-4">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-primary mr-2" />
@@ -282,7 +279,7 @@ const Landing = () => {
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-primary mr-2" />
-                      <span>Sincronização em até 5 dispositivos</span>
+                      <span>Dispositivos ilimitados</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-primary mr-2" />
@@ -296,44 +293,9 @@ const Landing = () => {
                       <Check className="h-5 w-5 text-primary mr-2" />
                       <span>Compartilhamento seguro</span>
                     </li>
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  <PricingButton className="w-full" plan="premium">
-                    Começar Teste Gratuito
-                  </PricingButton>
-                </CardFooter>
-              </Card>
-
-              {/* Lifetime Plan (previously Business Plan) */}
-              <Card className="flex flex-col justify-between border-2 h-full">
-                <CardHeader>
-                  <div className="flex justify-between items-center">
-                    <CardTitle className="text-xl">Vitalício</CardTitle>
-                    <div className="inline-block px-3 py-1 text-sm rounded-full bg-muted">Completo</div>
-                  </div>
-                  <div className="mt-4 flex items-baseline">
-                    <span className="text-4xl font-bold">R$200</span>
-                    <span className="ml-1 text-muted-foreground">pagamento único</span>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 mt-4">
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
-                      <span>Tudo do plano Premium</span>
-                    </li>
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
-                      <span>Dispositivos ilimitados</span>
-                    </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-primary mr-2" />
                       <span>Acesso vitalício a atualizações</span>
-                    </li>
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-primary mr-2" />
-                      <span>Autenticação de dois fatores avançada</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-primary mr-2" />
@@ -346,9 +308,9 @@ const Landing = () => {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full" variant="outline" onClick={() => navigate("/checkout")}>
+                  <PricingButton className="w-full" plan="lifetime" price="200">
                     Comprar Agora
-                  </Button>
+                  </PricingButton>
                 </CardFooter>
               </Card>
             </div>
