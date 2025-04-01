@@ -69,7 +69,6 @@ export function PasswordsProvider({ children }: { children: React.ReactNode }) {
       setPasswords(data);
     } catch (error) {
       console.error("Erro ao carregar senhas:", error);
-      toast.error("Falha ao carregar senhas");
     } finally {
       setIsLoading(false);
     }
